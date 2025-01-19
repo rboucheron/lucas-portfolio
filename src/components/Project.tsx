@@ -11,7 +11,7 @@ const Project: React.FC = () => {
       <Object
         onClick={(position) => setCameraPosition(position)}
         assets="/assets/3d/fauteil.glb"
-        cameraPositionOnClick={{ x: -1, y: 1.2, z: 1.2 }}
+        positionOnClick={{ x: -1, y: 1.2, z: 1.2 }}
       />
     </Scene>
   );
