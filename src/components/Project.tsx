@@ -1,15 +1,18 @@
-// App.tsx
-import React from 'react';
-import Scene from './Scene';
-import Model from './Model';
-
+import React from "react";
+import Scene from "./Scene";
+import { useCameraPosition } from "../utils/store";
+import Object from "./Object";
 
 const Project: React.FC = () => {
+  const { setCameraPosition } = useCameraPosition();
+
   return (
     <Scene>
-
-
-      <Model  />
+      <Object
+        onClick={(position) => setCameraPosition(position)}
+        assets="/assets/3d/fauteil.glb"
+        cameraPositionOnClick={{ x: -1, y: 1.2, z: 1.2 }}
+      />
     </Scene>
   );
 };
