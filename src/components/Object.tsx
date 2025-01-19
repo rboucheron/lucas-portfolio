@@ -6,13 +6,13 @@ import { objectProps } from "../three/interface/objectProps";
 const Object: React.FC<objectProps> = ({
   onClick,
   assets,
-  positionOnClick,
+
 }) => {
   const { scene } = useGLTF(assets) as unknown as GLTFResult;
 
   return (
     <>
-      <primitive object={scene} onClick={() => onClick(positionOnClick)} />
+      <primitive object={scene} onClick={() => onClick()} />
     </>
   );
 };

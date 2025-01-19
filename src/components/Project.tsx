@@ -1,32 +1,69 @@
-
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Scene from "./Scene";
 import { useCameraPosition } from "../utils/store";
 import Object from "./Object";
+import { projectData } from "../interfaces/projectData";
+import { fetchProjectData } from "../utils/apiRequester";
+import { position } from "../three/interface/position";
+import { Link } from "react-router-dom";
 
 const Project: React.FC = () => {
   const { setCameraPosition } = useCameraPosition();
+  const [projects, setProjects] = useState<projectData[]>([]);
+  const [selectProject, setSelectProject] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetchProject();
+  }, []);
+
+  const fetchProject = async () => {
+    try {
+      const data = await fetchProjectData();
+      setProjects(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleObjectClick = (position: position, id: number) => {
+    setCameraPosition(position);
+    setSelectProject(id);
+  };
+
+  const handleSceneClick = () => {
+    setSelectProject(null);
+    setCameraPosition({
+      x: 0,
+      y: 1,
+      z: 2,
+    });
+  };
 
   return (
-    <Scene>
-      <Object
-        onClick={(position) => setCameraPosition(position)}
-        assets="/assets/3d/fauteil.glb"
-        positionOnClick={{ x: -1, y: 0.8, z: 0.9 }}
-      />
+    <>
+      <div className="mt-6">
+        <Scene onSceneClick={handleSceneClick}>
+          {projects.map((project) => (
+            <Object
+              key={project.id}
+              onClick={() => handleObjectClick(project.position, project.id)}
+              assets={project.object}
+            />
+          ))}
+        </Scene>
+      </div>
 
-      <Object
-        onClick={(position) => setCameraPosition(position)}
-        assets="/assets/3d/ball.glb"
-        positionOnClick={{ x: -1, y: 0.3, z: 1.7 }}
-      />
-
-      <Object
-        onClick={(position) => setCameraPosition(position)}
-        assets="/assets/3d/chaise.glb"
-        positionOnClick={{ x: 0, y: 0.8, z: 0.9 }}
-      />
-    </Scene>
+      {selectProject && (
+        <div className="w-full flex items-center p2 ">
+          <Link
+            to="/project/"
+            className="bg-maron text-white p-4 font-semibold rounded-xl m-auto "
+          >
+            _VOIR LE PROJETS
+          </Link>
+        </div>
+      )}
+    </>
   );
 };
 

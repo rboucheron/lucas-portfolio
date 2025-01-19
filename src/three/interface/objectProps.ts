@@ -1,20 +1,16 @@
-
-import { position } from "./position";
-
 export interface objectProps {
   assets: string;
-  positionOnClick: position;
-  onClick: (position: position) => void;
-  onContextMenu?: (position: position) => void;
-  onDoubleClick?: (position: position) => void;
-  onWheel?: (position: position) => void;
-  onPointerUp?: (position: position) => void;
-  onPointerDown?: (position: position) => void;
-  onPointerOver?: (position: position) => void;
-  onPointerOut?: (position: position) => void;
-  onPointerEnter?: (position: position) => void;
-  onPointerLeave?: (position: position) => void;
-  onPointerMove?: (position: position) => void;
-  onPointerMissed?: (position: position) => void;
-  onUpdate?: (position: position) => void;
+  onClick: () => void;
+  onContextMenu?: () => void;
+  onDoubleClick?: () => void;
+  onWheel?: () => void;
+  onPointerUp?: () => void;
+  onPointerDown?: () => void;
+  onPointerOver?: () => void;
+  onPointerOut?: () => void;
+  onPointerEnter?: () => void;
+  onPointerLeave?: () => void;
+  onPointerMove?: () => void;
+  onPointerMissed?: () => void;
+  onUpdate?: () => void;
 }
