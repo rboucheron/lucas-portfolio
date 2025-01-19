@@ -8,11 +8,11 @@ const Scene: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
     <Canvas
       ref={canvasRef}
-      style={{ width: "90vw", height: "90vh" }}
-      camera={{ position: [0, 3, 2], fov: 75 }}
+      style={{ width: "100%", height: "90vh" }}
+      camera={{ position: [0, 2.3, 2], fov: 75 }}
     >
       <CameraController />
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={1.5} />
       <pointLight position={[10, 10, 10]} />
       {children}
     </Canvas>
